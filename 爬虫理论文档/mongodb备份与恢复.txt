@@ -1,0 +1,11 @@
+mongodump -h 127.0.0.1:27017 -d stu -o /Users/lpf/Desktop/mongodata
+备份:mongodump -h -d -o
+-h:host "IP:port"
+-d:备份的数据库名字 db
+-o:备份到哪里去
+
+mongorestore -h 127.0.0.1:27017 -d newdbs --dir /Users/lpf/Desktop/mongodata/stu
+恢复:mongorestore -h -d --dir
+-h:host
+-d:恢复的数据的名字
+--dir:从哪里恢复 

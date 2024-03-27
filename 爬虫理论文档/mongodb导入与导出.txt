@@ -1,0 +1,24 @@
+数据导出
+mongoexport -h dbhost -d dbname -c colname -o filename --type json/csv -f
+
+-h:服务器地址
+-d:数据库名
+-c:集合名
+-o:导出文件名
+--type:文件类型,默认json格式,可选数据类型json,csv
+-f:需要导出的字段,导出为json格式的数据时可以不指定导出哪些字段,默认全部,导出成csv文件
+示例:
+mongoexport -h "127.0.0.1:27017" -d stu -c stu -o data.json --type json(导出的要是json格式可以省略type不写)
+mongoexport -h "127.0.0.1:27017" -d stu -c stu -o data.csv --type csv -f name,age,hometown
+
+
+
+数据导入
+mogoimport -d dbname -c collectionname --file data.json(导入json字段)
+mogoimport -d dbname -c collectionname --file data.json --headerline --type csv(导入csv字段)
+-d:数据库名
+-c:collection名
+--type:导入的格式默认json
+-f:导入的字段名
+--headerline:如果导入的格式是csv,则可以使用第一行的标题作为导入的字段
+--file:要导入的文件

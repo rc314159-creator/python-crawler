@@ -1,0 +1,50 @@
+# 反爬的重点 流程:
+    user-agent池
+    IP池
+    cookies 池 
+
+    请求头字段
+    host
+    refrence 
+
+    验证码: 图形识别 机器学习 训练图片模型;  打码平台
+    js: selenium; js解析
+    其他: 
+
+
+
+# js的解析操作 万不得已的时候才会用 耗时耗力
+# 演示 登录 js解析
+
+#  1. network -- 登录网址   参数
+#  2. 加密密码js rkey c1:-100
+#  3. 右击 登录按钮, 右击 右侧 event lisenter 
+
+#  4. 断点 js;  
+#  5. 断点调试 找到 需要的参数 和 js文件
+
+exec_js 速度最快, 识别差一点
+js2py   速度适中, 精准
+PyV8    速度最慢, 准确率最高 
+
+
+
+无头 headless
+--user-agent=
+--proxy-server=
+
+iframe
+driver.switch_to.frame()
+driver.switch_to.window([0])
+driver.switch_to.default_content()
+
+
+# 斗鱼 判断是否到下一页 driver
+# 1. 下一页的按钮 shark-pager-disable-next 前面是没有; 最后一页才有
+    find_element(标签不存在) 和 find_elements[]
+# 2. 根据class 里面的个数
+# 3. soup 可以查找下一页的标签
+# 4. str.find('shark-pager-disable-next') != -1
+
+
+

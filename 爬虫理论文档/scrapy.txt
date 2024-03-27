@@ -1,0 +1,49 @@
+#安装scrapy
+pip install scrapy
+
+
+创建爬虫的项目
+scrapy startproject 项目名称
+
+创建爬虫的文件
+scrapy genspider 爬虫名字 爬虫的范围.com
+
+运行爬虫
+scrapy runspider 爬虫文件.py--需要cd到文件所在路径
+scrapy crawl 爬虫名称
+
+
+解析数据
+response.xpath('')
+返回来的结果是列表selector;提取出来内容 extract()
+建议使用 item 设置字段 避免手误的低级错误
+
+
+
+数据存储
+item-engine--pipeline
+	def open_spider(self,spider):
+		self.file = open()
+	def process_item():
+		保存代码json csv mysql redis mongodb
+		return item
+	def close_spider(self,spider):
+		self.file.close()		
+千万注意:记得在settings.py开启管道
+scrapy crawl 爬虫名字 -o 文件名
+
+
+
+
+scrapy中shell的使用:可以判断动静态数据
+设置user-agnet:scrapy shell '网站url' -s user-agent="..."
+打印数据:print(response.body)
+xpath的使用:result = response.xpath('...')
+print(result)      如果响应的是动态数据则没有结果,若有数据则是静态数据
+数据提取:print(result[0].extract())返回的是list;如果为空 取下标会报错
+数据提取第一个:print(result[0].extract_first())返回str;如果数据为空则返回None
+
+
+shell中bs4的使用:
+response.css('selector::text').extract()
+response.css('selector::attr("href")').extract()

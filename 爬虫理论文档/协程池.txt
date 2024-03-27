@@ -1,0 +1,13 @@
+单线程 gevent
+生成器 monkey
+打补丁 monkey.patch_all()
+socket模块中阻塞改成非阻塞
+
+
+from gevent.pool import Pool
+import gevent.monkey
+gevent.monkey.path_all()
+p = Pool()
+p.apply_async()
+
+#没有关闭的方法(即没有close方法)

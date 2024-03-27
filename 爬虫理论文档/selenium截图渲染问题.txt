@@ -1,0 +1,18 @@
+由于chrome与selenium兼容存在问题,因此导致截图截不了
+解决方案:
+from selenium import webdriver
+if __name__ == '__main__':
+    options = webdriver.ChromeOptions()
+    options.add_argument("--disable-gpu")  ----借用GPU进行渲染
+    driver = webdriver.Chrome(options=options)
+
+    driver.get('http:/www.json.cn/')
+
+    driver.save_screenshot('01json.png')
+
+    data = driver.page_source
+    print(type(data))
+
+    driver.quit()---关闭浏览器
+
+    driver.close()---关闭页面

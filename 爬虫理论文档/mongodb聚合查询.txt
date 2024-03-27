@@ -1,0 +1,72 @@
+//管道有顺序
+db.xx.aggregate(
+	[
+		{管道1},
+		{管道2},
+	]
+)
+
+
+//多条件的 多件事
+$group:分组
+	//数据按照 gender性别分组
+	db.stu.aggregate(
+		[
+			{$group:{_id:"$gender"}}
+		]
+)
+
+
+//表达式:$sum $avg $first $last $max $min $push
+//数据按照 性别分组 求年龄的平均值
+db.stu.aggregate({$group:{_id:"$gender",age_avg:{$avg:"$age"}}})
+
+//按照籍贯分组,求年龄和
+db.stu.aggregate({$group:{_id:"$hometown",age_sum:{$sum:"age"}}})
+
+//$push 将分组想取出来的数据 放入到一个列表
+//取出 按照性别分组的 所有人的名字
+db.stu.aggregate({$group:{_id:"$gender",all_name:{$push:"$name"}}})
+
+
+$match:查找符合条件的数据 ; find 区别
+//查询功能一样
+//match可以配合管道使用的
+
+//取出年龄大于20的人
+db.stu.find({age:{$gt:20}})
+db.stu.aggregate({$match:{age:{$gt:20}}})
+
+
+//取出年龄小于40的;按照性别分组求年龄平均值($avg)
+db.stu.aggregate({$match:{age:{$lt:40}}},{$group:{_id:"$gender",age_avg:{$avg:"$age"}}})
+
+
+object:投影取出部分字段;显示1
+//取出年龄大于20;按照籍贯分组 求出年龄之和,求年龄平均值;查看的时候只想看到之和
+db.stu.aggregate(
+		{$match:{age:{$gt:20}}},
+		{$group:{_id:"$hometown",age_sum:{$sum:"$age"},age_avg:{$avg:"$age"}}},
+		{$project:{age_sum:1}}
+		)
+
+
+$sort:排序 1升序 -1降序
+//先找 45以下 再按籍贯分组 求平均值之和 再降序 再投影
+db.stu.aggregate(
+		{$match:{age:{$lt:45}}},
+		{$group:{_id:"$hometown",age_avg:{$avg:"$age"},last_sum:{$last:"$age"}}},
+		{$sort:{age_avg:-1}},
+		{$project:{age_avg:1}}
+		)
+
+
+
+//注意点:管道是有顺序的 不能随意颠倒 根据需求
+//先跳过2个 再显示4个
+db.stu.aggregate({$skip:2},{$limit:4})
+
+
+$unwind:将数据列表 分割 拆分
+//按照性别分组 求出人的名字 $push
+db.stu.aggregate({$group:{_id:"$gender",all_name_list:{$push:"$name"}}},{$unwind:"$all_name_list"})

@@ -1,0 +1,50 @@
+中间键(middlewares)
+
+#1.利用中间键反反爬
+#User-Agent下载中间键 request
+USER_AGENT_LIST = [
+	""
+	""
+	""
+	""
+]
+#建议将USER_AGENT_LIST放在配置文件settings中
+#要在settings文件中将DOWNLOADER_MIDDLEWARES = {
+	'xx.middlewares.XxDownloaderMiddleware' = 0-1000之间的数都行,
+}
+
+from .settings import USER_AGENT_LIST
+import random
+
+class UserAgentMiddleware(objec):
+	def process_request(self,request,spider):
+	#1.随机的user-agent
+	random_user = random.choice(USER_AGENT_LIST)
+
+	#2.request.headers['User-Agent']
+	request.headers['User-Agent'] = random_user
+	
+#演示 验证一下 传递的request是生效的
+	def process_response(self,request,response,spider):
+	print('#' * 100)
+	print(request.headers['User-Agent'])
+	return response---#这里必须要返回一个response对象或者一个request对象
+	
+
+
+#Proxy 下载中间键request
+#中间键中使用代理IP的方式---meta=['proxy']
+class ProxyMiddleware(object):
+	def process_request(self,request,spider):
+		#1.代理IP
+		proxy = 'http://110.110.120.11:8888'
+		#2.设置request.meta['proxy'] = 
+		request.meta['proxy'] = proxy
+
+
+
+
+scrapy中模拟登陆的三种方法:
+cookies = {}
+标准的代码登陆scrapy---自动保存
+from_response---自动解析from表单的参数和url

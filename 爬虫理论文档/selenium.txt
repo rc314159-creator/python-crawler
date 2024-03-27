@@ -1,0 +1,60 @@
+21设置无头浏览器Chrome
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')或者options.headless = True或者options.set_headless()此种方法已过期,不建议使用,可使用前两种
+driver = webdriver.Chrome(options=options)
+---------------------------------------------------------------------------------------------------------------------------------------
+driver = webdriver.Chrome()
+driver.get('http://mail.qq.com/cgi-bin/loginpage')
+
+#selenium遇到iframe是获取不到里面的标签;如果想获取,需要切换frame
+#1.找到需要的iframe
+iframe_element = driver.find_element_by_id('login_frame')
+#2.切换进去
+driver.switch_to.frame(iframe_element)
+
+driver.find_element_by_id('u').send_keys('QQ号')
+
+
+#切换原先的页面
+driver.switch_to.window(driver.window_handles[0])
+或者
+driver.switch_to.default_content()
+
+our_element = driver.find_element_by_xpath('')
+print(our_element.text)--获取标签的内容
+print(our_element.get_attribute('href'))--获取标签的属性
+
+--------------------------------------------------------------------------------------------------------------------
+#js代码 滚动到最后位置
+code_js = 'window.scrollTo(0,document.boy.scrollHeight)'
+driver.execute_script(code_js)
+
+----------------------------------------------------------------------------------------------------------------------------
+#查看user-agent
+result = getHttpRequestHeader(driver)
+print(result)
+
+#添加user-agent
+options.add_argument('--user-agent=myuseragent')
+
+#添加ip
+options.add_argument('--proxy-server=http:192.168.120.11:8888')
+
+#处理cookie--一般情况下不带cookie
+{cookie['name']: cookie['value'] for cookie in driver.get_cookies()}
+#删除一条cookie
+driver.delete_cookies("Cookiename")
+#删除所有的cookie
+driver.delete_all_cookies()
+-----------------------------------------------------------------------
+#获取弹框
+alert = driver.switch_to_alert()
+
+-----------------------------------------------------------------------
+#页面前进和后退
+driver.forward()--前进
+driver.back()--后退
+
+------------------------------------------------------------------------
+selenium能够执行页面上的js,对于js渲染的数据和模拟登陆处理起来非常容易
+selenium由于在获取页面的过程中会发送很多请求,所以效率非常低,所以在很多时候需要酌情使用

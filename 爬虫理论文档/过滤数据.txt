@@ -1,0 +1,1 @@
+Ïû³ı¿ÕĞĞ:print(xxx.strip())

@@ -1,0 +1,10 @@
+from multiproccessing.dummy import Pool
+
+p = Pool()
+p.apply_async()(callback="递归")--异步任务
+p.close()
+p.join()
+
+apply_async异步并发 不阻塞主线程
+下面的 Pool.close方法直接执行
+导致pool不存在--递归死循环---pool not runing

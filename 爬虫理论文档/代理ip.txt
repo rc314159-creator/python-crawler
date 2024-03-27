@@ -1,0 +1,20 @@
+ssl忽略认证
+https---->SSLError
+requests.get(url,headers=headers,verify=False)
+
+
+代理使用ip
+proxy={"协议" : "ip:port"}	
+	{"协议" : "用户名 : 密码@ip: port"}
+
+超时参数和重试
+	requests.get(url,headers=headers,timeout=秒)	#抛出异常
+	from retrying import retry
+	@retry(stop_max_attempt_number=秒) #发送请求获取响应的代码  抛出异常
+
+
+
+代理ip分类:
+透明
+匿名:不知道真实ip,但知道你使用了ip代理
+高匿:不知道真实ip,也不知道你使用了ip代理

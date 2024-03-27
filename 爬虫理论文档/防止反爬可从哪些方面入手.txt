@@ -1,0 +1,5 @@
+1.多user-agent
+2.多账户cookies
+3.降频率
+4.多ip
+

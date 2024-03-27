@@ -1,0 +1,4 @@
+multiproccessing.dummy:进程dummy线程池
+			pool
+
+proccess()

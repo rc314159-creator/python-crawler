@@ -1,0 +1,28 @@
+mongodb的索引操作
+1.创建批量的数据 20W 的数据
+for (var index = 0;index < 200000; index++){
+	db.stus.insert({_id:index,name:"name"+index,age:index
+	})
+}
+
+
+2.查看 数据的时间 对比 毫秒
+db.xx.find().explain('executionStats')
+
+2.1查看_id 	不到一毫秒,显示为0毫秒
+db.time.find({_id:188888}).explain('executionStats')
+
+2.2查看 name 134毫秒
+db.stus.find({name:'name188888'}).explain('executionStats')
+
+2.3查看age	142毫秒
+db.stus.find({age:188888}).explain('executionStats')
+
+3.设置 ID索引ensureIndex
+db.stus.ensureIndex({name:1})
+
+查询 所有的索引
+db.stus.getIndexes()
+
+4.删除 自定义的索引
+db.stus.dropIndex('name_1')
