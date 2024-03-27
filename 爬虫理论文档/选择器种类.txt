@@ -1,0 +1,13 @@
+标签选择器--result = soup.select('a')
+类选择器--result = soup.select('.属性')
+ID选择器--result = soup.select('#ID名')
+层级选择器  又名:后代选择器--result = soup.select('head title')
+组选择器--result = soup.select('第一组的属性名,第二组的属性名')
+属性选择器--result= soup.select('标签名[属性名="属性"]')
+
+
+#标签包裹的内容
+result = result[0].get_text()
+
+#标签的属性
+result = result[0].get('属性名')

@@ -1,0 +1,21 @@
+import requests
+import random
+
+if __name__ == '__main__':
+    #目标url
+    url = 'https://www.jdlingyu.mobi/tuji/cosplay/47912.html'
+        USER_AGENT_LIST: ["Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36",
+........
+    ]
+
+	#添加 模拟真实的浏览器
+	random_user = random.choice(USER_AGENT_LIST)
+	headers = {
+		'User-Agent':random_user
+}
+	#发送请求
+	response = requests.get(url, headers=headers)
+	data = response.content
+	data_str = data.decode('utf-8')
+	with open('01j.html','w') as f:
+		f.write(data_str)

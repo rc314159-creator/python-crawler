@@ -1,0 +1,16 @@
+#driver解析的标签
+find_element_by_class_name
+find_element_by_id
+find_element_by_name
+find_element_by_xpath
+
+
+#返回的list
+find_elements_by_class_name
+
+
+#切换页面
+driver.switch_to.window(driver.window_handles[0])
+
+
+

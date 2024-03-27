@@ -1,0 +1,36 @@
+python3中主线程结束,子线程不结束
+
+threading.Thread(target,argv)
+T.setDaemon=True	线程守护
+t.start
+t.join()	线程等待
+
+队列queue
+Queue(maxsize = 10)
+插入队列:put  计数器加1
+	put_no_wait 如果队列满了,不等待
+
+从队列中取:get 要配合q.task_done 计数器才会减1
+	get_no_wait 如果队列空了,不等待
+
+
+
+多线程
+th = threading.Thread(target="",args=())
+th.setDaemon = True
+th.start()
+th.join()
+
+q = Queue()
+q.put()	自动加1
+q.get() 不会自动减1,需要调用q.task_done() 计数器减1
+
+队列阻塞
+队列的计数器为0时,不阻塞
+q.join()
+
+#1.创建3个队列 分别为url,response,data的队列
+#2.入队列
+#3.出队列
+
+#4.给任务添加多线程

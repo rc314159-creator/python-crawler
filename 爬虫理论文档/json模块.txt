@@ -1,0 +1,16 @@
+json字符串---->python数据类型
+json.loads()
+python数据类型----->json字符串
+json.dumps()
+
+
+
+包含json的类文件对象--->python数据类型
+json.load()
+python数据类型--->包含json的类文件对象
+json.dump()
+
+
+
+
+response对象  json()方法  响应为json的时候才能用

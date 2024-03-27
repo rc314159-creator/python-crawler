@@ -1,0 +1,40 @@
+安装：pip install jsonpath
+
+
+$	根节点
+@	现行节点
+. or []	取子节点
+n/a	取父节点,jsonpath未支持
+..	就是不管位置,选择符合条件的条件
+*	匹配所有元素节点
+n/a	根据属性访问,json不支持,因为json是个key-value递归结构,不需要属性访问
+[]	迭代器标示(可以在里边做简单的迭代操作,如数组下标,根据内容选值等)
+[,]	支持迭代器中做多选
+?()	支持过滤操作
+()	支持表达式计算
+n/a	分组,jsonpath不支持
+
+
+
+
+
+import requests
+import jsonpath
+import json
+
+url = 'http://www.lagou.com/lbs/getAllCitySearchLabels.json'
+response =requests.get(url)
+html_str = response.content.decode()
+
+# 把json格式字符串转换成python对象
+jsonobj = json.loads(html_str)
+
+# 从根节点开始，匹配name节点
+citylist = jsonpath.jsonpath(jsonobj,'$..name')
+
+fp = open('city.json','w')
+
+content = json.dumps(citylist, ensure_ascii=False)
+
+fp.write(content.encode('utf-8'))
+fp.close()

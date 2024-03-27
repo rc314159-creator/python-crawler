@@ -1,0 +1,10 @@
+1.硬解
+耗时长 需要找到需要的js代码,python里面运行
+
+2.js2py:
+创建个js环境
+execute--执行
+
+3.excue_js:与js2py等价
+
+4.py8:必须依赖node环境

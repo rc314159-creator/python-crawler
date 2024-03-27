@@ -1,0 +1,66 @@
+安装:pip install scrapy
+
+为什么学习scrapy?
+1.scrapy不能解决剩下的10%的爬虫需求
+2.能够让看法过程方便,快速
+3.scrapy框架能够让我们的爬取效率更高
+
+
+什么是scrapy?
+使用了Twisted异步网络框架,可以加快我们的下载速度.
+Scrapy是一个为了爬取网站数据,提取结构性数据而编写的应用框架,我们只需要实现少量的代码,就能够快速的抓取.
+
+1.创建爬虫的项目:
+scrapy startproject 项目名称
+
+2.创建爬虫的文件:
+scrapy genspider 爬虫名字 爬虫的范围.com
+
+3.运行爬虫
+scrapy crawl 爬虫的名字
+scrapy runspider 爬虫.py(路径必须cd在文件路径)
+
+4.解析数据
+	1.response.xpath('')
+	2.返回来的结果 是 列表selector;提取出来内容 extract()
+	3.建议使用 item 设置字段 避免手误的低级错误
+
+5.数据存储
+	1.item--engine--pipeline
+		def open_spider(self,spider):
+			self.file = open()	
+		def process_item()
+			保存代码json csv mysql redis mongodb
+			return item
+		def close_spider(self,spider):
+			self.file.close()
+	2.千万注意:记得 在settings.py 开启管道
+
+scrapy shell 测试 解析的数据是否正确
+	1.如果 是在项目路径下 默认会加载 项目的settings
+	2.桌面 路径,需要自己设置
+	scrapy shell 'http://www.baidu.com' -s USER_AGENT=""
+	3.测试
+	.extract()返回是list;如果为空 去下标会报错
+	.extract_first() 返回str; 空 None
+
+
+
+循环发送 请求列表
+scrapy.Request(url,callback=)
+
+#1.既抓 列表页 又要 详情页
+
+#2.2个文件存储 list.json detail.json;2个pipeline 2个 item
+	pipeline 判断列表 详情页
+
+#统一个文件 listdetails.json; 1个pipeline,1个item
+	将列表页的item 传递给 详情页
+	可以将请求对象的参数传给响应对象
+	响应页面的item属性等于请求页面的item属性
+	meta={}
+
+
+
+
+

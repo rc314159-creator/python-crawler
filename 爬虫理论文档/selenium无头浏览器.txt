@@ -1,0 +1,74 @@
+#1.安装pip install selenium
+from selenium import webdriver
+
+if __name__ == '__main__':
+	#创建浏览器 对象
+	driver = webdriver.Chrome()
+
+	#get发送请求
+	driver.get('http://www.baidu.com')
+
+	#获取渲染完毕的数据page_source---str
+	data = driver.page_source
+
+	#关闭浏览器	
+	driver.quit()
+
+	#关闭页面
+	driver.close()
+
+	#截屏
+	driver.save_screenshot()
+
+	#给输入框 输入内容
+	input_element = driver.find_element_by_id('json-src")
+	input_elemet.sed_key("a":10,"b":20)
+
+	#点击 转换xml的标签
+	xml_element = driver.find_element_by_class_name('xml')
+	xml_element.click()
+
+	#点击什么是json的按钮
+	driver.find_element_by_xpath('/html/body/header/div/nav/div/a[2]').click()
+
+
+#driver解析的标签
+find_element_by_class_name
+find_element_by_id
+find_element_by_name
+find_element_by_xpath
+
+
+#返回的是list
+find_elements_by_class_name
+
+
+#查看页面
+print(driver.window_handles)---打印的是一个列表
+#跳转到指定页面
+driver.switch_to.window(driver.window_handles[下标])
+
+
+---------------------------------------------------------------
+from selenium import webdriver
+
+if __name__ == '__main__':
+	#设置无头浏览器
+	options = webdriver.ChromeOptions()
+	#以下三种任选其一
+	options.add_argument('--headless')
+	options.set_headless()
+	options.headless = True
+
+
+	#创建浏览器对象
+	driver = webdriver.Chrome(options=options)
+
+	#发请求
+	driver.get('http://www.baidu.com')
+
+	#获取数据
+	data = driver.page_source
+	#关闭浏览器
+	driver.quit()
+--------------------------------------------------------------

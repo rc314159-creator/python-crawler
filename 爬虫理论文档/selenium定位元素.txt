@@ -1,0 +1,23 @@
+from selenium import webdriver
+
+if __name__ == '__main__':
+    options = webdriver.ChromeOptions()
+    options.add_argument("--disable-gpu")
+    #1.浏览器对象
+    driver = webdriver.Chrome(options=options)
+    #2.发请求
+    driver.get('http:/www.json.cn/')
+
+    #给输入框输入内容
+    input_element = driver.find_element_by_id('json-src')
+    input_element.send_keys('{"a":10,"b":20}')
+
+    #点击  转换xml的标签
+    xml_element = driver.find_element_by_class_name('xml')
+    xml_element.click()
+
+    #点击 什么是json的按钮
+    driver.find_element_by_xpath('/html/body/header/div/nav/div/a[2]').click()
+
+    #3.保存快照
+    driver.save_screenshot(('02json.png'))

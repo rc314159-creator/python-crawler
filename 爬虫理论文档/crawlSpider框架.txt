@@ -1,0 +1,66 @@
+crawlspider:crawlspder爬虫可以按照规则自动获取连接.
+1.从response中提取所有的满足规则的url地址;
+2.自动的构造自己requests请求,发送给引擎.
+
+创建crawlspider爬虫:
+scrapy startproject 项目名
+scrapy genspider -t crawl 目录名 目录名.com
+
+导包:
+from scrapy.linkextractors import LinkExtractor
+from scrapy.spiders import CrawlSpider, Rule
+
+
+allow = (),		符合条件
+deny = (),		不允许(反向);优先级最高
+allow_domains = (),	允许的域名范围
+deny_domains = (),	不允许的域名范围
+deny_extensions = None,	不允许的扩展(如:.com/.cn)一般情况下不设置
+restrict_xpaths = (),
+tags = ('a','area'),	标签名字,默认抓的是a标签('area'类似于文本域,但是它是链接的)
+attrs = ('href'),
+canonicalize = True,	是否切换
+unique = True,		唯一
+process_value = None	当前进入里面的值
+
+
+
+follow默认规则:
+如果有callback(数据回调函数):follow默认为False
+如果没有callback,follow默认为True
+
+
+
+
+
+
+
+
+
+import scrapy
+from scrapy.linkextractors import LinkExtractor
+from scrapy.spiders import CrawlSpider, Rule
+
+
+class LookpianSpider(CrawlSpider):
+    name = 'lookpian'
+    allowed_domains = ['lookpian.com']
+    start_urls = ['https://www.lookpian.com/search.php?page=1&searchtype=5&tid=']
+
+    rules = (
+        Rule(LinkExtractor(allow=r'1'), callback='parse_item', follow=False),
+    )
+
+    def parse_item(self, response):
+        i = {}
+        i['name'] = response.xpath('//div/ul/li/div[1]/h5/a/text()').extract_first()
+        #主演
+        i['protagonist'] = response.xpath('//div/ul/li[1]/div[2]/text()').extract_first()
+        #链接
+        i['link'] = 'https://www.lookpian.com' + response.xpath('//a/@href').extract_first()
+        #评分
+        i['grade'] = response.xpath('//span[@class="score"]/text()').extract_first()
+        #集数
+        i['episode'] = response.xpath('//span[@class="note textbg"]/text()').extract_first()
+
+        return i

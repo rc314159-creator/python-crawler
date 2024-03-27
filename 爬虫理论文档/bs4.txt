@@ -1,0 +1,48 @@
+#创建Beautiful Soup对象
+soup = BeautifulSoup(html)
+#打开本地HTML文件的方式来创建对象
+soup = BeautifulSoup(open('index.html'))
+#格式化输出
+print soup.prettify()
+
+
+#搜索文档树
+find_all(name,attrs,recursive,text,**kwargs)
+name参数可以查找所有名字为name的tag
+text参数可以搜索文档中的字符串内容,与name参数的可选值一样,text参数接受字符串,正则表达式
+
+
+find的用法和find_all一样,区别在于只返回第一个符合匹配结果
+
+
+CSS选择器
+	写CSS时,标签名不加任何修饰,类名前加.	id名前加#
+	用soup.select()来筛选元素,返回类型是list
+
+
+通过标签选择器查找
+print soup.select('标签名')
+
+通过类选择器查找
+pront soup.select('.类值')
+
+通过id选择器查找
+print soup.select('#id值')
+
+层级选择器查找
+print soup.select('p #id值')
+
+通过属性选择器查找
+print soup.select('a[属性名="属性值"]')
+
+获取文本内容
+soup = BeautifulSoup(html, 'lxml')
+print type(soup.select('title'))
+print soup.select('title')[0].get_text()
+for title in soup.select('title'):
+    print title.get_text()
+
+获取属性 get('属性的名字')
+soup = BeautifulSoup(html, 'lxml')
+print type(soup.select('a'))
+print soup.select('a')[0].get('href')

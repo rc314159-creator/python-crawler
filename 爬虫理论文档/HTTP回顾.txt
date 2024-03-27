@@ -1,0 +1,68 @@
+HTTP和HTTPS
+HTTP:
+·超文本传输协议
+·默认端口号:80
+
+
+
+HTTP重要的响应头
+Set-Cookie(对方服务器设置cookie到用户浏览器的缓存)
+
+
+HTTPS:
+·HTTP + SSL(安全套接字层)ca证书
+·默认端口号:443
+HTTPS比HTTP更安全,但是性能更低
+
+
+
+浏览器发送http请求的过程
+	浏览器先向地址栏中的url发起请求,并获取响应
+	在返回的响应内容(HTML)中,会带有CSS,JS,图片等url地址,以及ajax代码,浏览器按照响应内容中的顺序依次发送其他的请求,并获取相应的响应
+	浏览器每获取一个响应就 对展示出的结果进行添加(加载),JS,CSS等内容会修改页面的内容,JS也可以重新发送请求,获取响应
+	从获取第一个响应并在浏览器中展示,知道最终获取全部响应,并在展示的结果中添加内容或修改
+
+[url的格式:
+形式:scheme://host[:port#]/path/.../[?query-string][#anchor]
+scheme:协议(列如:HTTP,HTTPS,ftp)
+host:服务器的ip地址或者域名
+port:服务器的端口(如果是走协议默认端口,80 or 443)
+path:访问资源的路径
+]
+
+
+响应状态码(status code)
+
+
+
+HTTP常见请求头:
+	--Host(主机和端口号)
+	--Connection(链接类型)
+	--Upgrade-Lnsecure-requests(升级为HTTPS请求)
+	--User-Agent(用户代理)
+		服务器能够识别客户使用的操作系统及版本,CPU类型,浏览器及版本,浏览器渲染引擎,浏览器语言,浏览器插件等
+	--Accept(传输文件类型)
+	--Referer(页面跳转处)
+	--Accept-Encoding(文件编解码格式)
+	--Cookie(Cookie)
+	--x-requested-with:
+		XMLHTTPRequest 是Ajax异步请求
+
+		http:get,post
+
+
+get与post方法
+get方法:
+	用来请求资源
+	在url中传输实体数据
+	传输的数据量小
+
+
+
+常见的状态码:
+200:成功
+302:临时转移至新的url
+307:临时转移至新的url
+404;找不到该页面
+500:服务器内部错误
+503:服务不可用,一般是被反爬

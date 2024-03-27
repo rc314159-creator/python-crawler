@@ -1,0 +1,11 @@
+1.代码登陆
+2.password加密之后js加密
+3.抓包--JS加密的这一段代码
+4.断点JS 查找 所有 和要执行JS代码 相关参数 和函数
+5.分析函数 关联哪些js文件
+6.分析参数从哪里来
+
+import js2py
+js执行环境 context = js2py.Evaljs()
+执行js代码 context.execute('js_code')
+context.t  (类型是js2py --to_dict--{})

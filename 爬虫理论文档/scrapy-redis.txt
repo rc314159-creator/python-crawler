@@ -1,0 +1,42 @@
+scrapy_redis在scrapy的基础上实现了更多、更强大的功能，具体体现在：
+	1.请求对象的持久化
+	2.去重的持久化
+	3.和实现分布式
+
+
+流程：
+1.在scrapy_redis中，所有的带爬取的对象和去重的指纹都存在所有的服务器公用的redis中
+2.所有的服务器公用一个redis中的request对象
+3.所有的request对象存入redis前，都会在同一个redis中进行判断，之前是否已经存入过
+4.在默认情况下所有的数会保存在redis中
+
+
+
+
+redis命令：
+启动服务器：redis-server
+启动客户端：redis-cli或者redis-cli -h<hostname> -p<端口号>
+切换db:select 
+查看所有的键：keys *
+清空db:flushdb
+清空数据库：flushall
+
+列表：
+LPUSH mylist "world" --向mylist从左边添加一个值
+LRANGE mylist 0 -1 --返回mylist中所有的值
+LLEN mylis --返回mylist的长度
+
+set：
+SADD myset "Hello" --往set中添加数据
+SMEMBERS myset --获取myset中所有的元素
+SCARD myset --scrad 获取集合的数量
+
+zset(有序集合）里面有一个权重：
+ZADD myzset 1 "one" --1位权重，one为值
+ZRANGE myzset 0 -1 WITHSCORES --查看所有权重和值
+
+
+
+
+安装：pip install scrapy-redis
+导包：from scrapy_redis.spiders import RedisSpider

@@ -1,0 +1,24 @@
+--字符是各种文字和符号的总称,包括各国家文字,标点符号,图形符号,数字等
+--字符集是多个字符的集合
+--字符集包括:ASCLL字符集,GB2312字符集,Unicode字符集等
+--ASCLL编码1个字节,而Unicode编码通常是2个字节(UCS-2)
+--UTF-8是Unicode的实现方式之一,UTF-8是一种变长的编码方式,可以是1,2,3个字节
+
+
+
+str类型和bytes类型
+Python2:只要不是str
+·str:非Unicode字符串
+·Unicode:Unicode字符
+
+Python3:只要不是bytes就是Unicode
+·bytes:二进制
+	互联网上数据的都是以二进制的方式传输的
+·str:Unicode的呈现形式
+
+
+str bytes如何转化
+·str使用encode方法转化为bytes
+·bytes通过decode转化为str
+·编码方式解码方式必须一样,否则就会出现乱码
+·所有均可以Unicode为中间转换量,随意转换
