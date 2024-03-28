@@ -4,4 +4,5 @@ git remote add "crawler" "git@github.com:02rc/python-crawler.git"
 git branch home_crawler
 git checkout -b home_crawler
 git pull crawler main
+git commit -m "3.27"
 git push crawler local:home_crawler
