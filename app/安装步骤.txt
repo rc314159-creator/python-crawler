@@ -1,0 +1,10 @@
+一、appium
+1、首先安装node js
+2、安装appium(通过node.js):
+	npm install -g appium
+3、安装appium-doctor(node.js):
+4、(可选)安装appium-client desktop：有安全漏洞，就不装了
+
+6、uiautomator2驱动程序安装：appium driver install uiautomator2
+
+二、android studio安装
